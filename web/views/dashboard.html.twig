@@ -1,0 +1,89 @@
+{% extends 'ag_base/backend.html.twig' %}
+
+{% block body_params %}class="skin-black"{% endblock %}
+
+{% block container %}
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+
+        {% include 'menu.html.twig' with {'option': 'dasboard'} %}
+
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <aside class="right-side">                
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    {% if sessions.type == "DEVELOPER" %}All the opened issues{% endif %}
+                    {% if sessions.type == "TESTER" %}Issues{% endif %}
+                </h1>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-body">
+
+                                <table id="issues_list" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            {% for table_column in table_headers %}
+                                            <th>{{ table_column }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	{% if rows is empty %}
+                                    	<tr><td colspan="5"><p class="nocomment">No data to show here. It's empty.</p></tr>
+                                    	{% endif %}
+                                    	{% for row in rows %}
+                                    	
+                                    		{% if row.project == 1 %}
+                                    			<tr>
+                                    				<td colspan="5" class="row-section">{{row.project_name}}</td>
+                                    			</tr>
+                                    		{% endif %}
+											
+											<tr>
+	                                    		<td><a href="/issues/detail/{{row.issue_id}}" class="issue-detail"><i class="fa fa-bug"></i> {{row.title}}</a></td>
+	                                    		<td>{{row.desc}}</td>
+	                                    		<td>{{row.priority}}</td>
+	                                    		<td>{{row.status}}</td>
+	                                    		{% if sessions.type == "DEVELOPER" %}
+	                                    		<td>
+	                                    		<a href="issues/status/done/{{row.id}}?project={{row.project_id}}" class="btn btn-success btn-xs">DONE</a>
+	                                    		</td>
+	                                    		{% endif %}
+	                                    		{% if sessions.type == "TESTER" %}
+	                                    		<td>
+	                                    		<a href="issues/status/done/{{row.id}}?project={{row.project_id}}" class="btn btn-success btn-xs">PASSED</a>&nbsp;
+	                                    		<a href="issues/status/open/{{row.id}}?project={{row.project_id}}" class="btn btn-warning btn-xs">OPEN</a>
+	                                    		<a href="issues/edit/{{row.id}}?project={{row.project_id}}" class="btn btn-primary btn-xs">EDIT</a>
+	                                    		</td>
+	                                    		
+	                                    		{% endif %}
+	                                    		{% if sessions.type == "ADMIN" %}
+	                                    		<td>
+	                                    		
+	                                    		</td>
+	                                    		{% endif %}
+	                                    	</tr>
+											
+                                    	{% endfor %}
+                                    	
+                                    </tbody>
+                                    
+                                </table>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section><!-- /.content -->
+        </aside><!-- /.right-side -->
+    </div><!-- ./wrapper -->
+
+{% endblock %}

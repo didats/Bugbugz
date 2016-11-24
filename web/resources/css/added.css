@@ -1,0 +1,49 @@
+.login-page header.header {
+	display:none !important;
+}
+
+.login {
+	width: 400px !important;
+	margin: 10% auto !important;
+}
+
+li.logout a {
+	color:#EB5C5C !important;
+	font-weight: bold;
+}
+
+.row-section {
+	background:#AAA !important;
+	color:#FFF;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 1em;
+}
+
+thead th {
+	background:#3c8dbc !important;
+	color:#FFF;
+}
+.button-status {
+	padding-top:30px;
+	text-align: right;
+}
+.button-status a {
+	margin-left:10px;
+}
+.issue-desc {
+	font-size:1.3em;
+}
+a.issue-detail {
+	font-weight: bold;
+	font-size:1.2em;
+	color:#000;
+	text-decoration: underline;
+}
+.comment-form {
+	background:#EFEFEF;
+	padding:12px;
+}
+p.nocomment {
+	text-align: center;
+}

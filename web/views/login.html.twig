@@ -1,0 +1,45 @@
+{% extends 'ag_base/backend.html.twig' %}
+
+{% block body_params %}class="skin-black login-page"{% endblock %}
+
+{% block container %}
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <form method="post" action="">
+        <section class="login center">
+        	<div class="row">
+        		<div class="box">
+        			<div class="box-body">
+        			
+        				<div class="row">
+			        		<div class="col-xs-12">
+			        			<h1>Login</h1>
+			        		</div>
+			        	</div>
+			        	<br />
+			        	
+			        	 <div class="form-group">
+						    <label for="form_username">Username</label>
+						    <input type="text" id="form_username" name="form[username]" class="form-control">
+						</div>
+						<div class="form-group">
+						    <label for="form_password">Password</label>
+						    <input type="password" id="form_password" name="form[password]" class="form-control">
+						</div>
+						
+        			</div>
+        			
+        			<div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+        			
+        		</div>
+        	</div>
+        </section>
+        </form>
+        
+    </div><!-- ./wrapper -->
+
+{% endblock %}
