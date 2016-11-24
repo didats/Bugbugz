@@ -39,10 +39,10 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 		'dbs.options' => array(
 			'db' => array(
 				'driver'   => 'pdo_mysql',
-				'dbname'   => 'bugbugz',
+				'dbname'   => 'bugs',
 				'host'     => '127.0.0.1',
-				'user'     => 'YOUR_USER',
-				'password' => 'YOUR_PASSWORD',
+				'user'     => 'root',
+				'password' => 'rimbunesia1!',
 				'charset'  => 'utf8',
 			),
 		)
