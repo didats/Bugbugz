@@ -111,47 +111,6 @@ $app->match('/users/list', function (Symfony\Component\HttpFoundation\Request $r
     return new Symfony\Component\HttpFoundation\Response(json_encode($queryData), 200);
 });
 
-
-
-
-/* Download blob img */
-$app->match('/users/download', function (Symfony\Component\HttpFoundation\Request $request) use ($app) { 
-    
-    // menu
-    $rowid = $request->get('id');
-    $idfldname = $request->get('idfld');
-    $fieldname = $request->get('fldname');
-    
-    if( !$rowid || !$fieldname ) die("Invalid data");
-    
-    $find_sql = "SELECT " . $fieldname . " FROM " . users . " WHERE ".$idfldname." = ?";
-    $row_sql = $app['db']->fetchAssoc($find_sql, array($rowid));
-
-    if(!$row_sql){
-        $app['session']->getFlashBag()->add(
-            'danger',
-            array(
-                'message' => 'Row not found!',
-            )
-        );        
-        return $app->redirect($app['url_generator']->generate('menu_list'));
-    }
-
-    header('Content-Description: File Transfer');
-    header('Content-Type: image/jpeg');
-    header("Content-length: ".strlen( $row_sql[$fieldname] ));
-    header('Expires: 0');
-    header('Cache-Control: public');
-    header('Pragma: public');
-    ob_clean();    
-    echo $row_sql[$fieldname];
-    exit();
-   
-    
-});
-
-
-
 $app->match('/users', function () use ($app) {
     
 	$table_columns = array(
@@ -297,7 +256,7 @@ $app->match('/users/edit/{id}', function ($id) use ($app) {
 			
 			$password_edit = "";
 			if($data['user_password'] != "") {
-				$password_edit = "`user_password` = '".passwordShield($data['user_password'])."'";
+				$password_edit = "`user_password` = '".passwordShield($data['user_password'])."',";
 			}
 			
             $update_query = "UPDATE `users` SET `user_id` = ?, `user_email` = ?, `user_name` = ?, `user_fullname` = ?, `user_type` = ?, `created_at` = ?,$password_edit `user_lastloggedin` = ? WHERE `id` = ?";
