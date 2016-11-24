@@ -3,6 +3,11 @@ Open source Bug tracker app based on Silex on top of [Crud Admin Generator](http
 This small app is for you who need the simplicity. We at [Rimbunesia](https://rimbunesia.com) are using this and it is currently 
 on developing mode. Use with your own risk.
 
+## Features
+1. There are 3 types of user. `ADMIN`, `DEVELOPER`, and `TESTER`
+2. Account Tester could review the issue after DEVELOPER `Set as DONE`.
+3. Very simple
+
 ### How to install
 Get the source code from Github
 
@@ -47,9 +52,9 @@ As we are using NGINX, this is the configuration. I am not sure how about Apache
 
 Open the screenshot directory to see the other result.
 
-!/screenshots/login.png
-!/screenshots/create_issue.png
-!/screenshots/detail_issue.png
+![ScreenShot](/screenshots/login.png)
+![ScreenShot](/screenshots/create_issue.png)
+![ScreenShot](/screenshots/detail_issue.png)
 
 ### Author
 
