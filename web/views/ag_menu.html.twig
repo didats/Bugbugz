@@ -1,0 +1,59 @@
+<aside class="left-side sidebar-offcanvas">                
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left info">
+                
+            </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        
+        <ul class="sidebar-menu">
+            
+            <li {% if menu is defined and menu == 'dashboard' %}class="active"{% endif %}>
+                <a href="{{ path('dashboard') }}">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                </a>
+            </li>
+            
+            <li {% if option is defined and option == 'projects_list' %}class="active"{% endif %}>
+                <a href="{{ path('projects_list') }}?show=all">
+                    <i class="fa fa-suitcase"></i> <span>All projects</span>
+                </a>
+            </li>
+            
+            <li {% if menu is defined and menu == 'showall' %}class="active"{% endif %}>
+                <a href="{{ path('dashboard') }}?show=all">
+                    <i class="fa fa-bug"></i> <span>All issues</span>
+                </a>
+            </li>
+            
+			{% if sessions.type == "DEVELOPER" or sessions.type == "TESTER" %}
+				
+				{% if myproject is defined %}
+					{% for project in myproject %}
+					<li class="{% if project_id is defined and project_id == project.id %}active{% endif %}">
+						<a href="/issues?project={{project.id}}"><i class="fa fa-mobile"></i> {{project.name}}</a>
+					</li>
+					{% endfor %}
+				{% endif %}
+				
+			{% else %}
+            	{% block menu %}{% endblock %}
+			{% endif %}
+			
+			<li {% if menu is defined and menu == 'account' %}class="active"{% endif %}>
+                <a href="/users/myaccount">
+                    <i class="fa fa-user"></i> <span>My Account</span>
+                </a>
+            </li>
+			
+			<li class="logout">
+				<a href="/logout"><i class="fa fa-unlock"></i> Logout</a>
+			</li>
+			
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

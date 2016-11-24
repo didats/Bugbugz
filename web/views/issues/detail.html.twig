@@ -1,0 +1,137 @@
+{% extends 'ag_base/backend.html.twig' %}
+
+{% block container %}
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+
+        {% include 'menu.html.twig' with {'option': 'issues_edit'} %}
+
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <aside class="right-side">                
+            <!-- Content Header (Page header) -->
+            <section class="content-header row">
+                <div class="col-md-8">
+	                <h1>
+	                    {{data.issue_title}}
+	                </h1>
+                </div>
+                <div class="col-md-4 button-status">
+					{% if sessions.type == "DEVELOPER" %}
+					<a href="" class="btn btn-success">SET DONE</a>
+					{% else %}
+					<a href="" class="btn btn-success">SET DONE</a>
+					<a href="" class="btn btn-primary">OPEN ISSUE</a>
+					{% endif %}
+				</div>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <div class="box box-info">
+                            <div class="box-body">
+								<div class="row">
+									<div class="col-md-4">
+										<label for="form_project_id">Issue ID</label>
+									    <div class="value">
+									    	{{data.issue_id}}
+									    </div>
+									</div>
+									
+									<div class="col-md-4">
+										<label for="form_project_id">Reporter</label>
+									    <div class="value">
+									    	{{reporter}}
+									    </div>
+									</div>
+									
+									<div class="col-md-4">
+										<label for="form_project_id">Assigned to</label>
+									    <div class="value">
+									    	{{assigned}}
+									    </div>
+									</div>
+									
+								</div>
+								
+								<hr />
+								
+								<div class="row">
+									<div class="col-md-4">
+										<label for="form_project_id">Type</label>
+									    <div class="value">
+									    	{{data.issue_type}}
+									    </div>
+									</div>
+									
+									<div class="col-md-4">
+										<label for="form_project_id">Priority</label>
+									    <div class="value">
+									    	{{data.issue_priority}}
+									    </div>
+									</div>
+									
+									<div class="col-md-4">
+										<label for="form_project_id">Status</label>
+									    <div class="value">
+									    	{{data.issue_status}}
+									    </div>
+									</div>
+									
+								</div>
+								<hr />
+								
+								<div class="issue-desc">{{data.issue_desc|raw}}</div>
+								
+								<br /><hr />
+								<h4>Attachment(s)</h4>
+								
+								<div class="attachment">
+								{% for attachment in attachments %}
+									<a href="{{app.upload_path}}/{{attachment.attachment_file}}"><img src="{{app.upload_path}}/{{attachment.attachment_file}}" width="100" /></a>
+								{% endfor %}
+								</div>
+								
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                    </div>
+                    
+                    <div class="col-md-5">
+	                	<div class="box box-info">
+	                        <div class="box-body">
+	                        	
+	                        	<h4>Comments</h4>
+	                        	<hr />
+	                        	
+	                        	{% if comments_length == 0 %}
+	                        		<p class="nocomment">No comment yet. Submit the form below to add comment.</p>
+	                        		<br />
+	                        	{% else %}
+	                        		{% for comment in comments %}
+	                        		<p><strong><i class="fa fa-user"></i> {{comment.user}}</strong>: {{comment.text}}</p>
+	                        		{% endfor %}
+	                        	{% endif %}
+	                        	
+	                        	
+	                        	<div class="comment-form">
+	                        		<form name="" method="post">
+	                        		<strong>Add comment</strong><br /><br />
+	                        		<textarea rows="3" cols="80" class="form-control" name="comment"></textarea>
+	                        		<br />
+	                        		<input type="submit" class="btn btn-primary" value="Submit" />
+	                        		</form>
+	                        	</div>
+	                        	
+	                        </div>
+	                	</div>
+	                </div>
+                </div>
+                
+            </section><!-- /.content -->
+        </aside><!-- /.right-side -->
+    </div><!-- ./wrapper -->
+
+{% endblock %}
