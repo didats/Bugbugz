@@ -1,3 +1,4 @@
 vendor/
 composer.lock
+src/app.php
 web/uploads/
