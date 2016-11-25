@@ -147,7 +147,7 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `user_id`, `user_email`, `user_name`, `user_password`, `user_fullname`, `user_type`, `created_at`, `user_lastloggedin`)
 VALUES
-	(1,'111-111','admin@someemail.com','admin','06f1fe4ee081458d93c8526cd7059507','Admin','ADMIN','2016-11-24 23:11:09',NULL);
+	(1,'111-111','admin@someemail.com','admin','77bc627399fddc76bb0dbd40b23335e9','Admin','ADMIN','2016-11-24 23:11:09',NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
