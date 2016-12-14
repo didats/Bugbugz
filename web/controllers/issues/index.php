@@ -154,7 +154,7 @@ $app->match('/issues/list', function (Symfony\Component\HttpFoundation\Request $
 $app->get("/issues/status/{status}/{id}", function($status, $id) use($app) {
 	
 	// check if the issue under this guy
-	$strSQL = "SELECT * FROM issues WHERE issue_id = ? AND user_id = ?";
+	$strSQL = "SELECT * FROM issues WHERE id = ? AND user_id = ?";
 	$row = $app['db']->fetchAssoc($strSQL, array($id, $app['session']->get("user")['id']));
 	
 	if(count($row) > 0) {
@@ -170,7 +170,14 @@ $app->get("/issues/status/{status}/{id}", function($status, $id) use($app) {
 		$rst = $app['db']->executeUpdate($strSQL, array(strtoupper($status), $id));
 	}
 	
-	return $app->redirect($app['url_generator']->generate('issues_list')."?project=".$_GET['project']);
+	if(isset($_GET['from'])) {
+		if ($_GET['from'] == "dashboard") {
+			return $app->redirect($app['url_generator']->generate('dashboard'));
+		}
+	}
+	else {
+		return $app->redirect($app['url_generator']->generate('issues_list')."?project=".$_GET['project']);
+	}
 	
 	return false;
 });

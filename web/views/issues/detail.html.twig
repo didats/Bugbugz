@@ -17,10 +17,10 @@
                 </div>
                 <div class="col-md-4 button-status">
 					{% if sessions.type == "DEVELOPER" %}
-					<a href="" class="btn btn-success">SET DONE</a>
+					<a href="/issues/status/done/{{data.issue_id}}" class="btn btn-success">SET DONE</a>
 					{% else %}
-					<a href="" class="btn btn-success">SET DONE</a>
-					<a href="" class="btn btn-primary">OPEN ISSUE</a>
+					<a href="/issues/status/done/{{data.issue_id}}" class="btn btn-success">SET DONE</a>
+					<a href="/issues/status/open/{{data.issue_id}}" class="btn btn-primary">OPEN ISSUE</a>
 					{% endif %}
 				</div>
             </section>

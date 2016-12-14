@@ -41,8 +41,8 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 				'driver'   => 'pdo_mysql',
 				'dbname'   => 'bugs',
 				'host'     => '127.0.0.1',
-				'user'     => 'YOURUSER',
-				'password' => 'YOURPASSWORD',
+				'user'     => 'root',
+				'password' => 'rimbunesia1!',
 				'charset'  => 'utf8',
 			),
 		)
@@ -50,8 +50,8 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 
 $app['twig']->addGlobal('sessions', $app['session']->get("user"));
 
-$app['asset_path'] = 'https://trackr.local/resources';
-$app['upload_path'] = 'https://trackr.local/uploads';
+$app['asset_path'] = 'http://trackr.local/resources';
+$app['upload_path'] = 'http://trackr.local/uploads';
 $app['debug'] = true;
 	// array of REGEX column name to display for foreigner key insted of ID
 	// default used :'name','title','e?mail','username'

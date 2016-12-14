@@ -48,19 +48,19 @@
 											
 											<tr>
 	                                    		<td><a href="/issues/detail/{{row.issue_id}}" class="issue-detail"><i class="fa fa-bug"></i> {{row.title}}</a></td>
-	                                    		<td>{{row.desc}}</td>
+	                                    		<td>{{row.desc|raw}}</td>
 	                                    		<td>{{row.priority}}</td>
 	                                    		<td>{{row.status}}</td>
 	                                    		{% if sessions.type == "DEVELOPER" %}
 	                                    		<td>
-	                                    		<a href="issues/status/done/{{row.id}}?project={{row.project_id}}" class="btn btn-success btn-xs">DONE</a>
+	                                    		<a href="issues/status/done/{{row.id}}?project={{row.project_id}}&from=dashboard" class="btn btn-success btn-xs">DONE</a>
 	                                    		</td>
 	                                    		{% endif %}
 	                                    		{% if sessions.type == "TESTER" %}
 	                                    		<td>
-	                                    		<a href="issues/status/done/{{row.id}}?project={{row.project_id}}" class="btn btn-success btn-xs">PASSED</a>&nbsp;
-	                                    		<a href="issues/status/open/{{row.id}}?project={{row.project_id}}" class="btn btn-warning btn-xs">OPEN</a>
-	                                    		<a href="issues/edit/{{row.id}}?project={{row.project_id}}" class="btn btn-primary btn-xs">EDIT</a>
+	                                    		<a href="issues/status/done/{{row.id}}?project={{row.project_id}}&from=dashboard" class="btn btn-success btn-xs">PASSED</a>&nbsp;
+	                                    		<a href="issues/status/open/{{row.id}}?project={{row.project_id}}&from=dashboard" class="btn btn-warning btn-xs">OPEN</a>
+	                                    		<a href="issues/edit/{{row.id}}?project={{row.project_id}}&from=dashboard" class="btn btn-primary btn-xs">EDIT</a>
 	                                    		</td>
 	                                    		
 	                                    		{% endif %}
