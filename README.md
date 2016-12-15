@@ -1,6 +1,9 @@
 ## BugBugz
 Open source Bug tracker app made with [Silex](http://silex.sensiolabs.org) on top of [Crud Admin Generator](https://github.com/jonseg/crud-admin-generator). 
-This small app is for you who need the simplicity. We at [Rimbunesia](https://rimbunesia.com) currently using this small app and still in heavy development
+This small app is for you who need the simplicity. We at [Rimbunesia](https://rimbunesia.com) currently using this small app and this thing still in heavy development.
+
+## Disclaimer
+The codes is under heavy development, use at your own risk. 
 
 ## The flow
 1. `TESTER` create a Project
