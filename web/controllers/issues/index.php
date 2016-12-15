@@ -94,6 +94,7 @@ $app->match('/issues/list', function (Symfony\Component\HttpFoundation\Request $
     
     $user_type = $app['session']->get("user")["type"];
     $user_id = $app['session']->get("user")["id"];
+    
     $project = $_GET['projectid'];
     
     if(strlen($whereClause) > 0) {
@@ -119,6 +120,9 @@ $app->match('/issues/list', function (Symfony\Component\HttpFoundation\Request $
 		}
     }
     
+    if (isset($_GET['projectid'])) {
+	    $whereClause .= " AND project_id = '".$_GET['projectid']."'";
+    }
     
     $recordsTotal = $app['db']->executeQuery("SELECT * FROM `issues`" . $whereClause . $orderClause)->rowCount();
     
@@ -154,7 +158,16 @@ $app->match('/issues/list', function (Symfony\Component\HttpFoundation\Request $
 $app->get("/issues/status/{status}/{id}", function($status, $id) use($app) {
 	
 	// check if the issue under this guy
-	$strSQL = "SELECT * FROM issues WHERE id = ? AND user_id = ?";
+	$field = "id";
+	$theID = explode("-", $id);
+	$projectID = "";
+	if(preg_match("/\-/", $id)) {
+		$field = "issue_id";
+	}
+	else {
+		$field = "id";
+	}
+	$strSQL = "SELECT * FROM issues WHERE $field = ? AND user_id = ?";
 	$row = $app['db']->fetchAssoc($strSQL, array($id, $app['session']->get("user")['id']));
 	
 	if(count($row) > 0) {
@@ -164,9 +177,10 @@ $app->get("/issues/status/{status}/{id}", function($status, $id) use($app) {
 			}
 		}
 		
+		$projectID = $row['project_id'];
 		
 		// update
-		$strSQL = "UPDATE issues SET issue_status = ? WHERE id = ?";
+		$strSQL = "UPDATE issues SET issue_status = ? WHERE $field = ?";
 		$rst = $app['db']->executeUpdate($strSQL, array(strtoupper($status), $id));
 	}
 	
@@ -176,7 +190,7 @@ $app->get("/issues/status/{status}/{id}", function($status, $id) use($app) {
 		}
 	}
 	else {
-		return $app->redirect($app['url_generator']->generate('issues_list')."?project=".$_GET['project']);
+		return $app->redirect($app['url_generator']->generate('issues_list')."?project=".$projectID);
 	}
 	
 	return false;
@@ -242,7 +256,7 @@ $app->match('/issues', function () use ($app) {
     getMyProjects();
     
     // project detail
-    $project = $app['db']->fetchAssoc("SELECT * FROM projects WHERE project_id = ?", array($_GET['project']));
+    $project = $app['db']->fetchAssoc("SELECT * FROM projects WHERE project_id = '".$_GET['project']."'");
     
     return $app['twig']->render('issues/list.html.twig', array(
     	"table_columns" => $table_columns,
